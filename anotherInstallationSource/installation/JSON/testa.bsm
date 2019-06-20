@@ -1,0 +1,8 @@
+#testa
+variable(v1,42)
+#node(State,Test,Actions,Defaults)
+node(start,1,control3=0x300;state = off,)
+node(off,timeout > 10,eventfire = 1;state = firing,)
+node(off,1,varv1=v1+1,)
+node(firing,eventfired,outdec = v1;state = off,)
+node(firing,timeout > 60,state = off,)

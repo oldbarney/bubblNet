@@ -1,0 +1,13 @@
+# test
+#variable(Name,Value)
+variable(dryThresh,20)
+variable(detectTime,300)
+variable(onTime,1800)
+variable(offTime,3600)
+variable(sent,0)
+#node(State,Test,Actions,Defaults)
+node(start,1,control5=0x300;cursor=0;outstring="Waiting";state = start1,)
+node(start1,ipa<>"127.0.0.1",cursor=0;outstring=ipa;state = off,)
+node(off,timeout > 20,eventfire = 1;state = firing,)
+node(firing,eventfired,state = off,)
+node(firing,timeout>120,state = off,)

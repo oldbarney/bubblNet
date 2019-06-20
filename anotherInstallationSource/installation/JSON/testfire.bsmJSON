@@ -1,0 +1,23 @@
+# testfire
+#variable(Name,Value)
+#triggered by eventfire=1
+#fires 'eventfired=1' when finished
+#node(State,Test,Actions,Defaults)
+node(start,1,control3=0x300;state = off,)
+node(off,eventfire = 1,control5=0x101;varcnt=0;state = on0,)
+node(on0,timeout>5,varcnt=cnt+1;state=on1,)
+node(on1,cnt<6,control5=0x101;state=on0,)
+node(on1,1,control5=0x302;varcnt=0;state = on2a,)
+node(on2a,timeout>5,varcnt=cnt+1;state=on2,)
+node(on2,cnt<6,control5=0x302;state=on2a,)
+node(on2,1,control5=0x200;eventfired = 1;state = off,)
+
+[ [ {"var":val,}
+ ["<state>",["cond",[actions]]],
+]
+            
+{ "name":<name>,
+  "variables":["name":value,...],
+  "nodes":[["state",["cond",[actions]]],...
+          ]
+}

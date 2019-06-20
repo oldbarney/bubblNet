@@ -1,0 +1,30 @@
+{"name":"test",
+ "vars":[
+  ["dryThresh","20"],
+  ["detectTime","300"],
+  ["offTime","3600"],
+  ["sent","0"],
+  ["onTime","1800"]
+ ],
+"nodes":[
+  ["start",[[
+    "1",[
+        "control5=0x300",
+        "cursor=0",
+        "outstring=\"Waiting\"",
+        "state = start1"]]]],
+  ["start1",[[
+    "ipa<>\"127.0.0.1\"",[
+        "cursor=0",
+        "outstring=ipa",
+        "state = off"]]]],
+  ["off",[[
+    "timeout > 20",[
+        "eventfire = 1",
+        "state = firing"]]]],
+  ["firing",[[
+    "eventfired",[
+        "state = off"],
+    "timeout>120",[
+        "state = off"]]]]
+]}

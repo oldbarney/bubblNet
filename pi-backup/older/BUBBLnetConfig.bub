@@ -1,0 +1,9 @@
+info(BUBBLnet base station configuration parameters)
+info(This configuration file controls base_station.py behaviour)
+cfg(serial,1234)
+cfg(RFchannel,51)
+cfg(period,300)
+cfg(scriptPath,/home/pi/)
+cfg(BSMs,sprinkler;bsmdb.db,sprinklerb;bsmdb.db)
+cfg(TESTBSMs,test;bsmdb.db,testfire;bsmdb.db)
+

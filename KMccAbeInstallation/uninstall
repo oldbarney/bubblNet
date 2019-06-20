@@ -1,0 +1,11 @@
+rm /usr/lib/cgi-bin/readdb.py 
+rm /usr/sbin/base_station.py 
+rm /usr/sbin/base_station_monitor.py
+rm /usr/sbin/sensor_config.py
+rm /usr/sbin/nrf24l01.py
+rm /usr/sbin/hd44780u_i2c.py
+rm /executeBSM.py
+rm /base_station.py
+rm /home/pi/bubblNetSetup
+rm /etc/init.d/bubnet
+

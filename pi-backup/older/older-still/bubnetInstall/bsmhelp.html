@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body LANG="en-GB" BGCOLOR="#A0ffff">
+<h1>BUBBLNet Behavioural State Machine Reference</h1>
+<h4>Author: Barnaby McCabe</h4>
+<h4>Revised 21st February 2017</h4>
+<h3 class="">Built in variables</h3>
+<table border="1">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>timeofday</td><td>0..24*60*60-1 secs</td></tr>
+<tr><td>hourofday</td><td>0..23
+<tr><td>dayofweek</td><td>0..6 for Mon to Sun
+<tr><td>ipa</td><td>   LAN IP address (num.num.num.num)
+<tr><td>ipa1</td><td>Part 1 of LAN IP address</td></tr>
+<tr><td>ipa2</td><td>Part 2 of LAN IP address</td></tr>
+<tr><td>ipa3</td><td>Part 3 of LAN IP address</td></tr>
+<tr><td>ipa4</td><td>Part 4 of LAN IP address</td></tr>
+<tr><td>timeout</td><td>Seconds since entered state</td></tr>
+<tr><td>sensor&lt;channel&gt;</td><td>Value read from sensor (0..1024)<br />channel is 0 to 99</td></tr>
+<tr><td>battery&lt;channel&gt;</td><td>Battery voltage of sensor/control in mV<br />channel is 0 to 99</td></tr>
+<tr><td>button&lt;name&gt;</td><td>Button pressed</td></tr>
+<tr><td>event&lt;name&gt;</td><td>Event fired by other BSM</td></tr>
+</table>
+<h3>Operators</h3>
+<table border=1>
+<tr><th>Operator</th><th>Arguments</th></tr>
+<tr><td>&gt;</td><td>numeric</td></tr>
+<tr><td>&lt;</td><td>numeric</td></tr>
+<tr><td>&gt;=</td><td>numeric</td></tr>
+<tr><td>&lt;=</td><td>numeric</td></tr>
+<tr><td>&lt;&gt;</td><td>numeric or string</td></tr>
+<tr><td>=</td><td>numeric or string</td></tr>
+<tr><td>OR</td><td>numeric</td></tr>
+<tr><td>AND</td><td>numeric</td></tr>
+<tr><td>+</td><td>numeric</td></tr>
+<tr><td>-</td><td>numeric</td></tr>
+<tr><td>*</td><td>numeric</td></tr>
+<tr><td>MOD</td><td>numeric</td></tr>
+<tr><td>/</td><td>numeric</td></tr>
+</table>
+<h3>Actions</h3>
+<table border="1">
+<tr><th>Action</th><th>Description</th></tr>
+<tr><td>control&lt;channel&gt;=&lt;number&gt;</td><td>Channel is 1 to 99<br />Activate up to 8 controls,<br /> low 8 bits are state,<br /> upper 8 bits are mask</td></tr> 
+<tr><td>state=&lt;state-name&gt;</td><td>Change-state (must be last action in list)</td></tr> 
+<tr><td>mailto:&lt;email address&gt;=&lt;message&gt;</td><td>Send email message</td></tr> 
+<tr><td>log=&lt;message&gt;</td><td>Add message to log file</td></tr> 
+<tr><td>var&lt;variable name&gt;=&lt;expression&gt;</td><td>Assign value to variable</td></tr>  
+<tr><td>event&lt;event-name&gt;=&lt;expression&gt;</td><td>Fire event for other BSM's</td></tr>  
+</table> 
+</body>   

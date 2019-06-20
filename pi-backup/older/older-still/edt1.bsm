@@ -1,0 +1,11 @@
+#BSM edt1
+#variable(Name,Value)
+variable(v,11)
+#node(State,Cond,Actions)
+node(s1,c11,a111;a112)
+node(s2,c21,a211;a212;a213)
+node(s2,c22,a221;a222)
+node(s3,c31,a311)
+node(s4,c41,a411)
+node(s5,c51,a511)
+node(s6,c61,a611)

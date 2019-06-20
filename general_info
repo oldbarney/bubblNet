@@ -1,0 +1,98 @@
+.helphttps://google-developers.appspot.com/chart/interactive/docs/gallery/linechart#examples
+https://jsfiddle.net/api/post/library/pure/
+http://raspberrywebserver.com/cgiscripting/rpi-temperature-logger/building-an-sqlite-temperature-logger.html
+
+
+gives this:-
+
+
+sudo apt-get install sqlite3
+
+Then at a terminal type this command to enter the SQLite shell:
+
+
+$ sqlite3 templog.db
+
+In the SQLite shell I entered these commands to create a table called temps:
+
+
+BEGIN;
+CREATE TABLE temps (timestamp DATETIME, temp NUMERIC);
+COMMIT;
+
+
+$ sudo cp templog.db /var/www/
+$ sudo chown www-data:www-data /var/www/templog.db 
+
+
+The Apache daemon has its own user name, www-data. I changed the database file's owner from pi to www-data so that Apache can read the file.
+
+
+
+Monitor.py contains a function called log_temperature which stores readings in the database.
+This function connects to the database and creates a cursor. The cursor object is used to execute an SQL command to insert the temperature as a number along with the current date and time.
+Finally, log_temperature commits the transaction to the database and closes the connection.
+
+
+# store the temperature in the database
+def log_temperature(temp):
+
+    conn=sqlite3.connect(dbname)
+    curs=conn.cursor()
+
+    curs.execute("INSERT INTO temps values(datetime('now'), (?))", (temp,))
+
+    # commit the changes
+    conn.commit()
+
+    conn.close()
+
+
+sudo chown www-data:www-data readdb.py
+apechectl -V
+apachectl -V
+l
+ls
+sudo mv ./readdb.py /usr/lib/cgi-bin
+sudo chmod a+x /usr/lib/cgi-bin/readdb.py
+
+
+
+sudo leafpad /etc/apache2/sites-enabled/000-default &
+
+
+sudo leafpad /etc/apache2/sites-enabled/000-default.conf &
+
+
+put this inside <virtual_host>
+  <Directory "/var/www/cgi-bin">
+    Options ExecCGI
+    AddHandler cgi-script .py
+    AllowOverride all
+    Require all granted
+</Directory>
+
+
+
+
+
+
+sudo a2enmod cgi
+
+
+service apache2 restart
+cd /usr/lib/cgi-bin
+ls
+sudo mv ~Desktop/readdb.py ./
+sudo chmod +x ./readdb.py 
+ls
+sudo service apache2 restart
+ls
+./readdb.py 
+sudo leafpad /usr/lib/cgi-bin/readdb.py &
+
+
+
+
+http://raspberrywebserver.com/cgiscripting/writing-cgi-scripts-on-a-raspberry-pi.html
+https://en.wikipedia.org/wiki/Common_Gateway_Interface

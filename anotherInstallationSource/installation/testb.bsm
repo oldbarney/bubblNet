@@ -1,0 +1,10 @@
+# testb  - act on fired event, fire event to acknowledge
+#variable(Name,Value)
+#triggered by eventfire=1
+#fires 'eventfired=1' when finished
+#node(State,Test,Actions,Defaults)
+node(start,1,control3=0x300;state = off,)
+node(off,eventfire = 1,control5=0x101;state = on1,)
+node(on1,timeout > 3,control5=0x202;state = on2,)
+node(on2,timeout > 4,control5=0x300;eventfired = 1;state = off,)
+

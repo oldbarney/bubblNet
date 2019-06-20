@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.sel {
+    background-color: lightblue;
+}
+td { background-color: lightgreen; 
+     vertical-align: text-top;
+}
+table {
+    empty-cells:show; 
+}
+button { 
+    background-color: pink; 
+}
+</style>
+<script>
+
+function title() { document.getElementById("title").innerHTML="BSM Editor"; }
+function debugg(str) {document.getElemtentById("demo").innerHTML=str; }
+
+function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+}
+
+function blankRow(st) {
+  var tab=document.getElementById("states");
+  var rows=tab.getElementsByTagName("tr");
+  var count=rows.length;
+  
+  if (st==undefined) {
+      row=rows[count-1];
+ //     debugg("row="+row.innerHTML);
+      row.children[2].innerHTML+="<hr />";
+      return;
+  } else st="-";
+  newst=document.createElement("td");
+  newst.id="row"+count;
+  newst.innerHTML=st;
+  newcnd=document.createElement("td");
+  newcnd.valign="top";
+  newact=document.createElement("td");
+  
+  newrow=document.createElement("tr");
+  newrow.appendChild(newst);
+  newrow.appendChild(newcnd);
+  newrow.appendChild(newact);
+  
+  
+  tab.appendChild(newrow);
+  
+}
+
+function userselect(el) {
+  if (document.lastsel!=undefined) {
+//     document.lastsel.removeAttribute("class");
+     document.lastsel.setAttribute("class","selectable")
+     //here remove buttons
+  }
+  if (el.nodeName=="TD")
+    el.setAttribute("class","sel");
+  
+  
+  /* el.innerHTML+='<br /><button onclick="doup()">Up</button><button onclick="dodown();">Dn</button><button onclick="dodel();">Del</button>';
+*/  
+  document.lastsel=el;
+ 
+}
+
+document.addEventListener('click', function(e) {
+    e = e || window.event;
+    userselect(e.target || e.srcElement);
+});
+
+
+function newVar(name,value) {
+   var tab = document.getElementById("vars");
+   var row = tab.insertRow(tab.length);
+   row.insertCell(0).innerHTML = name ||'&nbsp;';
+   row.insertCell(1).innerHTML = value || "";
+}
+
+
+
+function ncondrows(stat) {
+    var res=0;
+    var i;
+    for (i=0;i<stat[1].length;i++) {
+       res+=stat[1][i][1].length;
+    }
+    return res;
+}
+
+
+function editable(bsm) {
+    var res="<p>Name:"+bsm.name+"</p>";
+    res += '<table id="vars" border="1"><tr><th>Variable</th><th>Value</th></tr>';
+    var vars = bsm.vars;
+    var i;
+    for (i=0;i<vars.length;i++) {
+        res+='<tr><td>'+vars[i][0]+'</td><td>'+vars[i][1]+'</td></tr>';
+    }
+    res += '</table>';
+    res += '<button onclick="newVar();">Add Variable</button><br /><br />';
+
+    res += '<table id="states" border="1"><th>State</th><th>Condition(s)</th><th>Action(s)</th></tr>';
+  
+    var stats=bsm.nodes;
+    var j,k;
+    var stat,conds,cond,acts;
+    for (i=0;i<stats.length;i++) {
+        stat=stats[i];
+        conds=stat[1];
+        cond=conds[0];
+        acts=cond[1];
+        res+='<tr><td rowspan="'+ncondrows(stat)+'">'+stat[0]+'</td><td rowspan="'+acts.length+'">'+cond[0]+'</td><td>'+acts[0]+'</td></tr>';
+        for (k=1;k<acts.length;k++) {
+           res+='<tr><td>'+acts[k]+'</td></tr>';
+        }
+        for (j=1;j<conds.length;j++) {
+            cond=conds[j];
+            acts=cond[1];
+            res+='<tr><td rowspan="'+acts.length+'">'+cond[0]+'</td><td>'+acts[0]+'</td></tr>';
+            for (k=1;k<acts.length;k++) {
+                res+='<tr><td>'+acts[k]+'</td></tr>';
+            }
+        }
+    }        
+    res += '</table>';
+    return res;
+}
+
+
+
+
+</script>
+</head>
+<body>
+<h3 id="title"></h3>
+<div id="bsm"></div>
+
+
+
+<button onclick='blankRow("-");' >Add State</button>
+<button onclick='blankRow("");' >Add Condition</button>
+<button onclick='blankRow();' >Add Action</button>
+<button onclick='blankRow();' >Delete</button>
+
+
+<script>
+title();
+var tab=document.getElementById("states");
+
+mj=JSON.stringify(tab);
+document.innerHTML+=mj;
+</script>
+
+<script>readTextFile("test.JSON",function(text){ var bsmsrc=JSON.parse(text);document.getElementById("bsm").innerHTML=editable(bsmsrc);});
+</script>
+
+
+</body>
+</html>
+
+<table border="3">
+<tr><th>Variables</th><th>Name</th><th>Value</th></tr>
+<tr><td rowspan=2 ></td><td>x</td><td>43</td></tr>
+                 <tr><td>y</td><td>12</td></tr>
+<tr><th>State</th><th>Condition(s)</th><th>Action(s)</th></tr>
+<tr><td>start</td><td>x&gt;23 and x&lt;99 </td><td>state=go</td></tr>
+<tr><td rowspan=2 valign="top">go</td><td rowspan=2 valign="top">1</td><td>x=17</td></tr>
+<tr><td>state=gone</td></tr>
+<tr><td rowspan=4 valign="top">gone</td><td rowspan=2 valign="top">x!=12</td><td>x=12</td></tr>
+<tr><td>state=gone</td></tr>
+<tr><td rowspan=2 valign="top">timeout&gt;5</td><td>y=x+1</td></tr>
+<tr><td>state=go</td></tr>
+
+<tr><td rowspan=2 valign="top"><textarea>timeout&gt;5</textarea></td><td>y=x+1</td></tr>
+<tr><td>state=go</td></tr>
+
+</table>
+
+

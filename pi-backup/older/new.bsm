@@ -1,0 +1,5 @@
+#BSM new
+#variable(Name,Value)
+variable(-,-)
+#node(State,Cond,Actions)
+node(-,-,-)

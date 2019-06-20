@@ -1,0 +1,8 @@
+#BSM test
+#variable(Name,Value)
+variable(sent,0)
+#node(State,Cond,Actions)
+node(start,1,cursor=64;outstring=&qutWaiting&qut;eventwater = 0;state = start1)
+node(start1,ipa<>&qut127.0.0.1&qut,cursor = 0;outstring = ipa)
+node(start1,1,cursor = 64;outstring = ipa;outstring=&qut<&qut)
+node(off,0,state = off)

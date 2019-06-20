@@ -1,0 +1,5 @@
+#To be run at reboot -e.g. in crontab - database is RAM resident in /tmp
+sqlite3 /tmp/network.db ";"
+chmod 777 /tmp/network.db
+# /home/pi/Desktop/base_station.py
+

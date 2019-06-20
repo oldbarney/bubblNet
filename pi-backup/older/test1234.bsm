@@ -1,0 +1,9 @@
+#BSM test1234
+#variable(Name,Value)
+variable(dummy,0)
+#node(State,Cond,Actions)
+node(start,1,control5=0xFF00;state=st1)
+node(st1,timeout>10,control5=0xF01;state=st2)
+node(st2,timeout>10,control5=0xF02;state=st3)
+node(st3,timeout>10,control5=0xF04;state=st4)
+node(st4,timeout>10,control5=0xF08;state=st1)

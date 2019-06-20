@@ -1,0 +1,42 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          skeleton
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Example initscript
+# Description:       This file should be used to construct scripts to be
+#                    placed in /etc/init.d.  This example start a
+#                    single forking daemon capable of writing a pid
+#                    file.  To get other behavoirs, implemend
+#                    do_start(), do_stop() or other functions to
+#                    override the defaults in /lib/init/init-d-script.
+### END INIT INFO
+
+# Author: Barney McCabe oldbarney@hotmail.com
+#
+# Please remove the "Author" lines above and replace them
+# with your own name if you copy and modify this script.
+
+DESC="BubblNet Base-station"
+NAME="bubnet service"
+#DAEMON=/usr/sbin/base_station.py
+
+case "$1" in 
+    start)
+        echo "Starting BubblNet Base Station"
+        /usr/sbin/base_station.py&
+        ;;
+    stop)
+        echo "Stopping BubblNet Base Station"
+        killall base_station.py
+        ;;
+    *)
+        echo "Usage: /etc/init.d/bubnet start|stop"
+        exit 1
+        ;;
+esac
+
+exit 0
+

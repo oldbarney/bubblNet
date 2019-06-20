@@ -1,0 +1,14 @@
+# Sprinkler Control Algorithm
+#variable(Name,Value)
+variable(dryThresh,20)
+variable(detectTime,300)
+variable(onTime,1800)
+variable(offTime,3600)
+#node(State,Test,Actions,Defaults)
+node(start,1,control3=0x200;state = off,)
+node(off,sensor4 < dryThresh,state = detecting,)
+node(detecting,sensor4 > dryThresh,state=off,)
+node(detecting,timeout > detectTime,control3=0x202;state=on,)
+node(on,timeout > onTime,control3=0x200;state=waitOff,)
+node(waitOff,timeout > offTime,state=off,)
+

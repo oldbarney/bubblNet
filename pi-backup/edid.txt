@@ -1,0 +1,23 @@
+Enabling fuzzy format match...
+Parsing edid.dat...
+HDMI:EDID version 1.3, 0 extensions, screen size 15x10 cm
+HDMI:EDID features - videodef 0x80 !standby !suspend !active off; colour encoding:RGB444|YCbCr422; sRGB is not default colourspace; preferred format is native; does not support GTF
+HDMI:EDID ignored unknown descriptor tag 0x10
+HDMI:EDID ignored unknown descriptor tag 0x10
+HDMI:EDID ignored unknown descriptor tag 0x10
+HDMI:EDID does not yet know monitor vertical range, setting to default 24 to 120Hz
+HDMI:EDID failed to find a matching detail format for 800x480p hfp:40 hs:48 hbp:40 vfp:13 vs:3 vbp:29 pixel clock:32 MHz
+HDMI:EDID calculated refresh rate is 66 Hz
+HDMI:EDID guessing the format to be 800x480p @70 Hz
+HDMI:EDID found unknown detail timing format: 800x480p hfp:40 hs:48 hbp:40 vfp:13 vs:3 vbp:29 pixel clock:32 MHz
+HDMI:EDID established timing I/II bytes are 00 00 00
+HDMI:EDID standard timings block x 8: 0x0101 0101 0101 0101 0101 0101 0101 0101 
+HDMI:EDID adding mandatory support for DMT (4) 640x480p @ 60Hz
+HDMI:EDID filtering formats with pixel clock > 162 MHz or h. blanking > 1023
+HDMI:EDID no known preferred format has been set
+HDMI:EDID filtering preferred group has been changed from Invalid to DMT
+HDMI:EDID best score mode initialised to DMT (4) 640x480p @ 60 Hz with pixel clock 25 MHz (score 0)
+HDMI:EDID best score mode is now DMT (4) 640x480p @ 60 Hz with pixel clock 25 MHz (score 36864)
+HDMI:EDID preferred mode is updated to DMT (4) 640x480p @ 60 Hz with pixel clock 25200000 Hz
+HDMI:EDID has only DVI support and no audio support
+edid_parser exited with code 0

@@ -1,0 +1,30 @@
+en.doit.am
+    LUaNode
+    CLoud
+    Mobile phone app
+
+
+https://nodemcu.readthedocs.io/en/master/en/
+    Firmware for ESP8266012E
+    uses http://www.eluaproject.net/
+        http://www.eluaproject.net/doc/v0.9/en_refman_gen.html
+        https://github.com/elua  -Embedded Lua
+        http://www.eluaproject.net/doc/v0.9/en_arch_ltr.html
+        https://github.com/4refr0nt/ESPlorer
+
+https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html
+
+https://www.limpkin.fr/index.php?post/2016/04/17/A-Small-Collection-of-NodeMCU-Lua-Scripts-for-Data-Collection
+
+
+https://github.com/espressif/ESP8266_RTOS_SDK
+https://hackaday.com/2015/03/18/how-to-directly-program-an-inexpensive-esp8266-wifi-module/#more-148943
+
+https://nodemcu.readthedocs.io/en/dev/en/modules/wifi/
+    WiFi documentation
+
+Arduino (clone?)
+    https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html
+Python ased tool
+    https://github.com/4refr0nt/luatool/blob/master/luatool/luatool.py
+ 

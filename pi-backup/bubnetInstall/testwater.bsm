@@ -1,0 +1,7 @@
+#BSM testwater
+#variable(Name,Value)
+variable(offtime,72000)
+#node(State,Cond,Actions)
+node(start,1,control3 = 0xF00;control5 = 0xF00;state = waiting)
+node(waiting,timeout>10,eventwater=1;state = watering)
+node(watering,timeout>offtime,state = start)

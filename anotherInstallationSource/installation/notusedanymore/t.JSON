@@ -1,0 +1,36 @@
+{"name":"test",
+ "vars":[
+  ["dryThresh","20"],
+  ["detectTime","300"],
+  ["offTime","3600"],
+  ["sent","0"],
+  ["onTime","1800"]
+ ],
+"nodes":[
+  {"state":"start","conds":[
+    {"cond":"1","acts":[
+        "control5=0x300",
+        "cursor=0",
+        "outstring=\"Waiting\"",
+        "state = start1"]}]},
+  {"state":"start1","conds":[
+    {"cond":"ipa<>\"127.0.0.1\"","acts":[
+        "cursor=0",
+        "outstring=ipa",
+        "state = off"]}]},
+  {"state":"off","conds":[
+    {"cond":"timeout > 20","acts":[
+        "eventfire = 1",
+        "state = firing"]},
+    {"cond":"dummy","acts":[
+        "nutn",
+        "nutn",
+        "nutn"]}]},
+  {"state":"firing","conds":[
+    {"cond":"eventfired","acts":[
+        "state = off"]},
+    {"cond":"timeout>120","acts":[
+        "state = off"]},
+    {"cond":"dummy","acts":[
+        "state = off"]}]}
+]}

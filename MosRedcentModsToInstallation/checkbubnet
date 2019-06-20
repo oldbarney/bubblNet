@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+echo $(ps -ef | grep -v grep | grep base_station.py | wc -l)
+if (( $(ps -ef | grep -v grep | grep base_station.py | wc -l) > 0 ))
+then
+echo "bubnet is running!!!"
+else
+/etc/init.d/bubnet start &
+fi

@@ -1,0 +1,67 @@
+#!/bin/sh
+#Setup instructions
+#        install apache2
+#        
+#        make directory /usr/lib/cgi-bin
+#        copy readdb.py there
+#        
+#        
+#        /etc/init.d/bubnet is service start/stopper
+#        
+#        
+#        copy file to /etc/init.d/
+#        
+#        then run:        sudo update-rc.d bubnet defaults
+#
+
+mkdir -p /usr/lib/cgi-bin
+
+cp ./formtest0.py /usr/lib/cgi-bin
+cp ./formtest.py /usr/lib/cgi-bin
+
+chmod 777 /usr/lib/cgi-bin/formtest0.py
+chmod 777 /usr/lib/cgi-bin/formtest.py
+
+
+cp ./readdb.py /usr/lib/cgi-bin
+cp ./readbsm.py /usr/lib/cgi-bin
+cp ./bubblnet.py /usr/lib/cgi-bin
+cp ./bubblnetEd.py /usr/lib/cgi-bin
+cp ./base_station.py /usr/sbin
+cp ./base_station_monitor.py /usr/sbin
+cp ./sensor_config.py /usr/sbin
+cp ./nrf24l01.py /usr/sbin
+cp ./hd44780u_i2c.py /usr/sbin
+cp ./executeBSM.py /usr/sbin
+cp ./base_station.py /usr/sbin
+cp ./createBubNetTables.py /usr/sbin
+cp ./bubblNetSetup /home/pi
+cp ./mdbfile /home/pi
+chmod 777 /home/pi/mdbfile
+chmod 777 /home/pi/bubblNetSetup
+cp ./*.bsm /home/pi
+cp ./BUBBLnetConfig.bub /home/pi
+
+cp ./bubnet /etc/init.d/bubnet
+chmod 777 /usr/sbin/base_station.py
+chmod 777 /usr/sbin/createBubNetTables.py
+chmod 777 /etc/init.d/bubnet
+chmod 777 /usr/lib/cgi-bin/readdb.py
+chmod 777 /usr/lib/cgi-bin/bubblnet.py
+chmod 777 /usr/lib/cgi-bin/bubblnetEd.py
+chmod 777 /usr/lib/cgi-bin/readbsm.py
+./mdbfile
+update-rc.d bubnet defaults
+
+echo " Perform these setup actions"
+echo "sudo crontab - e    -> add @reboot /home/pi/bubblNetSetup"
+echo "                       add 5 * * * * /home/pi/bubNetInstall/checkbubnet"
+                    
+echo "crontab -e     -> add @reboot/home/pi/mdbfile"
+
+
+
+
+
+
+

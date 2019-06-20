@@ -1,0 +1,3 @@
+./formtest0.py >ht.html
+iceweasel ./ht.html
+

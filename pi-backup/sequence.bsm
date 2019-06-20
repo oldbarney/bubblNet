@@ -1,0 +1,11 @@
+#BSM sequence
+#variable(Name,Value)
+variable(runtime,900)
+#node(State,Cond,Actions)
+node(start,eventwater=1,control5 = 0xF01;state = step1)
+node(step1,timeout>runtime,control5 = 0xF02;state = step2)
+node(step2,timeout>runtime,control5 = 0xF04;state = step3)
+node(step3,timeout>runtime,control5 = 0xF08;state = step4)
+node(step4,timeout>runtime,control5 = 0xF00;control3 = 0x501;state = step5)
+node(step5,timeout>runtime,control3 = 0x504;state = step6)
+node(step6,timeout>runtime,control3 = 0x500;eventwater = 0;state = start)
